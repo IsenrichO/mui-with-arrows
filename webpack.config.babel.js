@@ -5,7 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import DotEnv from 'dotenv-webpack';
 import Path from 'path';
-// import PostCSS from './postcss.config';
+import PostCSS from './postcss.config';
 
 const isProdEnv = (process.env.NODE_ENV === 'production');
   console.log(`Node Environment:\t${process.env.NODE_ENV}`);
