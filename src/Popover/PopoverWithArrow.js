@@ -6,11 +6,9 @@ import RenderToLayer from '../internal/RenderToLayer';
 import propTypes from '../utils/propTypes';
 import Paper from '../Paper';
 import throttle from 'lodash.throttle';
+import PaperDefault from '../Paper/PaperWithArrow';
 import PopoverAnimationDefault from './PopoverAnimationDefault';
 import {isIOS, getOffsetTop} from '../utils/iOSHelpers';
-
-import PaperDefault from '../Paper/PaperDefault';
-
 
 const styles = {
   root: {

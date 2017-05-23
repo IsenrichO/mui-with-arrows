@@ -28,13 +28,13 @@ const BASE_CONFIG = {
   entry: {
     patch: 'react-hot-loader/patch',
     hmr: 'webpack/hot/only-dev-server',
-    bundle: Path.resolve(__dirname, 'src/App'),
+    bundle: Path.resolve(__dirname, 'src/index'),
     vendor: VENDOR_LIBS
   },
   output: {
-    path: Path.join(__dirname, 'dist'),
+    path: Path.join(__dirname, 'lib'),
     filename: '[name].[hash].js',
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -43,18 +43,6 @@ const BASE_CONFIG = {
         include: Path.resolve(__dirname, 'src'),
         exclude: /(node_modules|bower_components)/,
         use: 'babel'
-      }, {
-        test: /\.css$/i,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style',
-          use: 'css'
-        })
-      }, {
-        test: /\.(scss|sass)$/i,
-        loaders: ExtractTextPlugin.extract({
-          fallback: 'style',
-          use: ['css', 'postcss', 'sass?outputStyle=expanded']
-        })
       }, {
         test: /\.json$/i,
         use: 'json'
@@ -71,20 +59,9 @@ const BASE_CONFIG = {
     ]
   },
   plugins: [
-    // Configure and read in local environment variables:
-    new DotEnv({
-      path: './.env'
-    }),
     new Webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
       minChunks: Infinity
-    }),
-    new Webpack.DefinePlugin({
-      // 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-
-      // 'process.env': {
-      //   NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-      // }
     }),
     new Webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -93,7 +70,11 @@ const BASE_CONFIG = {
         postcss: { PostCSS }
       }
     }),
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin({
+      filename: 'styles.css',
+      disable: false,
+      allChunks: true
+    }),
     new HTMLWebpackPlugin({
       template: 'assets/index.html'
     })
@@ -121,7 +102,7 @@ const DEV_SERVER = {
     new Webpack.NamedModulesPlugin()
   ],
   devServer: {
-    contentBase: Path.resolve(__dirname, 'dist'),
+    contentBase: Path.resolve(__dirname, 'lib'),
     historyApiFallback: true,
     host: 'localhost',
     hot: true,
