@@ -71,9 +71,27 @@ const BASE_CONFIG = {
     ]
   },
   plugins: [
+    // Configure and read in local environment variables:
+    new DotEnv({
+      path: './.env'
+    }),
     new Webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
       minChunks: Infinity
+    }),
+    new Webpack.DefinePlugin({
+      // 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+
+      // 'process.env': {
+      //   NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      // }
+    }),
+    new Webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+      options: {
+        postcss: { PostCSS }
+      }
     }),
     new ExtractTextPlugin('styles.css'),
     new HTMLWebpackPlugin({
