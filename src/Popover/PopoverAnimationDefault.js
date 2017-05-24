@@ -1,8 +1,8 @@
-import transitions from '../styles/transitions';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import propTypes from '../utils/propTypes';
 import PaperWithArrow from '../Paper';
+import transitions from '../styles/transitions';
 
 function getStyles(props, context, state) {
   const {targetOrigin} = props;

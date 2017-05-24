@@ -16,7 +16,8 @@ const Arrow = ({
   return (
     <div
       className={getUniqClasses(className)}
-      style={prepareStyles(styles.arrow)}
+      style={DefaultStyles}
+      // style={prepareStyles(styles.arrow)}
     />
   );
 };

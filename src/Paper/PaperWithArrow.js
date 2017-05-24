@@ -41,7 +41,7 @@ function getStyles(props, context) {
   };
 }
 
-export default class PaperDefault extends Component {
+export default class PaperWithArrow extends Component {
   static propTypes = {
     children: PropTypes.node,
     circle: PropTypes.bool,

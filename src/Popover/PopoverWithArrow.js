@@ -165,6 +165,8 @@ export default class PopoverDefault extends Component {
     }
 
     const Animation = animation || PopoverAnimationDefault;
+    const { prepareStyles } = this.context.muiTheme;
+    const styles = getStyles(this.props, this.context);
 
     return (
       <Animation
@@ -175,7 +177,7 @@ export default class PopoverDefault extends Component {
       >
         <div
           className="paper-arrow"
-          style={prepareStyles(styles.arrow)}
+          style={prepareStyles(ArrowStyles)}
         />
         {children}
       </Animation>
@@ -204,7 +206,7 @@ export default class PopoverDefault extends Component {
       height: el.offsetHeight,
     };
 
-    a.right = rect.right || a.left + a.width;
+    a.right = rect.right || (a.left + a.width);
 
     // The fixed positioning isn't respected on iOS when an input is focused.
     // We need to compute the position from the top of the page and not the viewport.
