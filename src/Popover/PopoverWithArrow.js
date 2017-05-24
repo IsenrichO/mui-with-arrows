@@ -166,7 +166,6 @@ export default class PopoverDefault extends Component {
 
     const Animation = animation || PopoverAnimationDefault;
     const { prepareStyles } = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
 
     return (
       <Animation
