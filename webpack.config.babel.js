@@ -26,8 +26,8 @@ const VENDOR_LIBS = [
 
 const BASE_CONFIG = {
   entry: {
-    patch: 'react-hot-loader/patch',
-    hmr: 'webpack/hot/only-dev-server',
+    // patch: 'react-hot-loader/patch',
+    // hmr: 'webpack/hot/only-dev-server',
     bundle: Path.resolve(__dirname, 'src/index'),
     vendor: VENDOR_LIBS
   },

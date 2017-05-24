@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/SvgIcon/index.js"],"names":["default"],"mappings":";;;;;;;;;;;;;QAAOA,O","file":"index.js","sourcesContent":["export default from './SvgIcon';\n"]}
