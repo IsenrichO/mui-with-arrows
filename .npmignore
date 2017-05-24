@@ -2,29 +2,23 @@
 bower_components
 node_modules
 npm-debug.log
-build
-lib-cov
+src
 coverage
 .eslintcache
 
-# Exclude compiled files
-/lib
-icon-builder/js
-icon-builder/jsx
+# # Exclude IDE project folders
+# .idea
+# *.sublime-project
+# *.sublime-workspace
+# jsconfig.json
 
-# Exclude IDE project folders
-.idea
-*.sublime-project
-*.sublime-workspace
-jsconfig.json
+# # OS files
+# logs
+# *.log
+# .env
+# .DS_STORE
 
-# OS files
-logs
-*.log
-.env
-.DS_STORE
-
-# Runtime Data:
-pids
-*.pid
-*.seed
+# # Runtime Data:
+# pids
+# *.pid
+# *.seed

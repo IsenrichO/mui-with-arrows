@@ -1,6 +1,6 @@
 {
   "name": "mui-with-arrows",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "description": "Material-UI offshoot that allows for dynamically positioned CSS triangles",
   "main": "./src/index.js",
   "scripts": {
@@ -14,12 +14,14 @@
     "build:prod": "NODE_ENV=production npm run clean && webpack -p",
     "clean": "rimraf lib",
     "clean:build": "rimraf build",
+    "compile": "babel -d lib/ src/",
     "dev:serve": "npm run watch & webpack-dev-server -d",
     "install:babel": "babel src -d lib -s",
     "lint": "eslint src docs/src test --quiet --cache && echo \"eslint: no lint errors\"",
     "lint:find-rules": "eslint-find-rules -u .eslintrc.js",
     "prebuild": "npm run clean:build",
-    "prepublish": "node_modules/babel-cli/bin/babel.js src -d lib -s",
+    "prepublish": "NODE_ENV=release npm run compile",
+    "prepublish:node_module": "node_modules/babel-cli/bin/babel.js src -d lib -s",
     "test": "cross-env NODE_ENV=test babel-node test/index.js",
     "test:coverage": "cross-env NODE_ENV=test babel-node ./node_modules/istanbul/lib/cli.js cover test/index.js",
     "test:karma": "karma start test/karma.conf.js --single-run",
