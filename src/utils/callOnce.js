@@ -5,11 +5,6 @@ const CALLED_ONCE = 'muiPrepared';
 export default function callOnce() {
   if (process.env.NODE_ENV !== 'production') {
     return (style) => {
-      if (!style[CALLED_ONCE]) {
-        throw new ReferenceError(`Error: Unable to find \
-          property ${CALLED_ONCE} of ${typeof style} \`style\``);
-      }
-
       if (style[CALLED_ONCE]) {
         warning(
           false,
@@ -19,6 +14,11 @@ export default function callOnce() {
       }
       style[CALLED_ONCE] = true;
       return style;
+
+      // if (!style[CALLED_ONCE]) {
+      //   throw new ReferenceError(`Error: Unable to find \
+      //     property ${CALLED_ONCE} of ${typeof style} \`style\``);
+      // }
     };
   }
 }

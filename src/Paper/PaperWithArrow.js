@@ -31,14 +31,7 @@ function getStyles(props, context) {
       boxShadow: paper.zDepthShadows[zDepth - 1],   // No shadow for 0-depth `Paper`
       borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
     },
-    arrow: {
-      position: 'absolute',
-      content: '""',
-      right: 'calc(100% - 1px)',
-      border: '14px solid transparent',
-      borderRightColor: '#FFF',
-      filter: 'drop-shadow(-2px 1px 3px rgba(0, 0, 0, 0.24))',
-    },
+    arrow: ArrowStyles,
   };
 }
 
@@ -86,7 +79,7 @@ export default class PaperWithArrow extends Component {
       >
         <div
           className="paper-arrow"
-          style={prepareStyles(ArrowStyles)}
+          style={prepareStyles(styles.arrow)}
         />
         {children}
       </div>
