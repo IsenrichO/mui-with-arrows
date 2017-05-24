@@ -176,7 +176,8 @@ export default class PopoverDefault extends Component {
       >
         <div
           className="paper-arrow"
-          style={prepareStyles(ArrowStyles)}
+          // style={prepareStyles(ArrowStyles)}
+          style={ArrowStyles}
         />
         {children}
       </Animation>
