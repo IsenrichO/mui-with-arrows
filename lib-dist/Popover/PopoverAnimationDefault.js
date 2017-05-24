@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = undefined;
 
 var _assign = require('babel-runtime/core-js/object/assign');
 
@@ -22,10 +23,6 @@ var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _class, _temp2;
 
-var _transitions = require('../styles/transitions');
-
-var _transitions2 = _interopRequireDefault(_transitions);
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -41,6 +38,10 @@ var _propTypes4 = _interopRequireDefault(_propTypes3);
 var _Paper = require('../Paper');
 
 var _Paper2 = _interopRequireDefault(_Paper);
+
+var _transitions = require('../styles/transitions');
+
+var _transitions2 = _interopRequireDefault(_transitions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -96,18 +97,20 @@ var PopoverAnimationDefault = (_temp2 = _class = function (_Component) {
   }
 
   PopoverAnimationDefault.prototype.componentDidMount = function componentDidMount() {
-    this.setState({ open: true }); // eslint-disable-line react/no-did-mount-set-state
+    var open = true;
+    this.setState({ open: open });
   };
 
   PopoverAnimationDefault.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    this.setState({
-      open: nextProps.open
-    });
+    var open = nextProps.open;
+
+    this.setState({ open: open });
   };
 
   PopoverAnimationDefault.prototype.render = function render() {
     var _props = this.props,
         className = _props.className,
+        children = _props.children,
         style = _props.style,
         zDepth = _props.zDepth;
     var prepareStyles = this.context.muiTheme.prepareStyles;
@@ -118,8 +121,8 @@ var PopoverAnimationDefault = (_temp2 = _class = function (_Component) {
       _Paper2.default,
       {
         style: (0, _assign2.default)(styles.root, style),
-        zDepth: zDepth,
-        className: className
+        className: className,
+        zDepth: zDepth
       },
       _react2.default.createElement(
         'div',
@@ -127,7 +130,7 @@ var PopoverAnimationDefault = (_temp2 = _class = function (_Component) {
         _react2.default.createElement(
           'div',
           { style: prepareStyles(styles.vertical) },
-          this.props.children
+          children
         )
       )
     );

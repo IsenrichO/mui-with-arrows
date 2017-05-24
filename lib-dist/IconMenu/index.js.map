@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/IconMenu/index.js"],"names":["IconMenu","MenuItem","default"],"mappings":";;;;;;;;;;;;;;;;;QAAOA,Q;QACAC,Q;QAEAC,O","file":"index.js","sourcesContent":["export IconMenu from './IconMenu';\nexport MenuItem from '../MenuItem/MenuItem';\n\nexport default from './IconMenu';\n"]}

@@ -70,7 +70,7 @@ function getStyles(props, context) {
       boxSizing: 'border-box',
       fontFamily: baseTheme.fontFamily,
       WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // Remove mobile color flashing (deprecated)
-      boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0 depth papers
+      boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0-depth `Paper`
       borderRadius: circle ? '50%' : rounded ? borderRadius : 0
     },
     arrow: {
@@ -84,15 +84,15 @@ function getStyles(props, context) {
   };
 }
 
-var PaperDefault = (_temp = _class = function (_Component) {
-  (0, _inherits3.default)(PaperDefault, _Component);
+var PaperWithArrow = (_temp = _class = function (_Component) {
+  (0, _inherits3.default)(PaperWithArrow, _Component);
 
-  function PaperDefault() {
-    (0, _classCallCheck3.default)(this, PaperDefault);
+  function PaperWithArrow() {
+    (0, _classCallCheck3.default)(this, PaperWithArrow);
     return (0, _possibleConstructorReturn3.default)(this, _Component.apply(this, arguments));
   }
 
-  PaperDefault.prototype.render = function render() {
+  PaperWithArrow.prototype.render = function render() {
     var _props = this.props,
         arrow = _props.arrow,
         children = _props.children,
@@ -109,7 +109,7 @@ var PaperDefault = (_temp = _class = function (_Component) {
     return _react2.default.createElement(
       'div',
       (0, _extends3.default)({}, other, {
-        className: 'paper-default',
+        className: 'paper-with-arrow',
         style: prepareStyles((0, _assign2.default)(styles.root, style))
       }),
       _react2.default.createElement('div', {
@@ -120,7 +120,7 @@ var PaperDefault = (_temp = _class = function (_Component) {
     );
   };
 
-  return PaperDefault;
+  return PaperWithArrow;
 }(_react.Component), _class.propTypes = {
   children: _propTypes2.default.node,
   circle: _propTypes2.default.bool,
@@ -136,4 +136,4 @@ var PaperDefault = (_temp = _class = function (_Component) {
 }, _class.contextTypes = {
   muiTheme: _propTypes2.default.object.isRequired
 }, _temp);
-exports.default = PaperDefault;
+exports.default = PaperWithArrow;

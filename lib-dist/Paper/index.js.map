@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/Paper/index.js"],"names":["Paper","PaperWithArrow","default"],"mappings":";;;;;;;;;;;;;;;;;QAAOA,K;QACAC,c;QAEAC,O","file":"index.js","sourcesContent":["export Paper from './Paper';\nexport PaperWithArrow from './PaperWithArrow';\n\nexport default from './PaperWithArrow';\n"]}

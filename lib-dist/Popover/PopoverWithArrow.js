@@ -73,6 +73,8 @@ var _PopoverAnimationDefault2 = _interopRequireDefault(_PopoverAnimationDefault)
 
 var _iOSHelpers = require('../utils/iOSHelpers');
 
+var _Arrow = require('../Arrow');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
@@ -94,6 +96,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
     _this.renderLayer = function () {
       var _this$props = _this.props,
           arrow = _this$props.arrow,
+          arrowStyle = _this$props.arrowStyle,
           animated = _this$props.animated,
           animation = _this$props.animation,
           anchorEl = _this$props.anchorEl,
@@ -105,7 +108,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
           style = _this$props.style,
           targetOrigin = _this$props.targetOrigin,
           useLayerForClickAway = _this$props.useLayerForClickAway,
-          other = (0, _objectWithoutProperties3.default)(_this$props, ['arrow', 'animated', 'animation', 'anchorEl', 'anchorOrigin', 'autoCloseWhenOffScreen', 'canAutoPosition', 'children', 'onRequestClose', 'style', 'targetOrigin', 'useLayerForClickAway']);
+          other = (0, _objectWithoutProperties3.default)(_this$props, ['arrow', 'arrowStyle', 'animated', 'animation', 'anchorEl', 'anchorOrigin', 'autoCloseWhenOffScreen', 'canAutoPosition', 'children', 'onRequestClose', 'style', 'targetOrigin', 'useLayerForClickAway']);
 
 
       var styleRoot = style;
@@ -116,9 +119,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
           zIndex: _this.context.muiTheme.zIndex.popover
         };
 
-        if (!_this.state.open) {
-          return null;
-        }
+        if (!_this.state.open) return null;
 
         return _react2.default.createElement(
           _PaperWithArrow2.default,
@@ -131,6 +132,8 @@ var PopoverDefault = (_temp = _class = function (_Component) {
       }
 
       var Animation = animation || _PopoverAnimationDefault2.default;
+      var prepareStyles = _this.context.muiTheme.prepareStyles;
+
 
       return _react2.default.createElement(
         Animation,
@@ -138,6 +141,11 @@ var PopoverDefault = (_temp = _class = function (_Component) {
           style: styleRoot,
           targetOrigin: targetOrigin,
           open: _this.state.open && !_this.state.closing
+        }),
+        _react2.default.createElement('div', {
+          className: 'paper-arrow'
+          // style={prepareStyles(ArrowStyles)}
+          , style: _Arrow.ArrowStyles
         }),
         children
       );
@@ -149,41 +157,22 @@ var PopoverDefault = (_temp = _class = function (_Component) {
     };
 
     _this.setPlacement = function (scrolling) {
-      if (!_this.state.open) {
-        return;
-      }
-
-      if (!_this.refs.layer.getLayer()) {
-        return;
-      }
+      if (!_this.state.open) return;
+      if (!_this.refs.layer.getLayer()) return;
 
       var targetEl = _this.refs.layer.getLayer().children[0];
       var arrowEl = targetEl.children[0];
-      // console.log(
-      //   'PLACEMENT children:', this.refs.layer.getLayer().children,
-      //   '\nArrow Child:', arrowEl,
-      // );
 
-      if (!targetEl) {
-        return;
-      }
+      if (!targetEl) return;
 
       var _this$props2 = _this.props,
           targetOrigin = _this$props2.targetOrigin,
           anchorOrigin = _this$props2.anchorOrigin;
 
       var anchorEl = _this.props.anchorEl || _this.anchorEl;
-      // console.log(
-      //   'ANCHOR ORIGIN:', anchorOrigin,
-      //   'TARGET ORIGIN:', targetOrigin,
-      // );
 
       var anchor = _this.getAnchorPosition(anchorEl);
       var target = _this.getTargetPosition(targetEl);
-      // console.log(
-      //   '\nANCHOR:', anchor,
-      //   '\nTARGET:', target,
-      // );
 
       var targetPosition = {
         top: anchor[anchorOrigin.vertical] - target[targetOrigin.vertical],
@@ -195,7 +184,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
       }
 
       if (_this.props.canAutoPosition) {
-        target = _this.getTargetPosition(targetEl); // update as height may have changed
+        target = _this.getTargetPosition(targetEl); // Update as height may have changed
         targetPosition = _this.applyAutoPositionIfNeeded(anchor, target, targetOrigin, anchorOrigin, targetPosition);
       }
 
@@ -206,17 +195,9 @@ var PopoverDefault = (_temp = _class = function (_Component) {
       if (window.innerHeight - anchor.top > target.bottom) {
         arrowEl.style.top = anchor.height / 2 - 7 + 'px';
         arrowEl.style.bottom = 'auto';
-
-        // arrowEl.style.borderWidth = '0 14px 14px';
-        // arrowEl.style.borderTopWidth = 0;
-        // arrowEl.style.borderBottomWidth = '14px';
       } else if (window.innerHeight - anchor.top < target.bottom) {
         arrowEl.style.top = 'auto';
         arrowEl.style.bottom = anchor.height / 2 - 7 + 'px';
-
-        //arrowEl.style.borderWidth = '14px 14px 0';
-        // arrowEl.style.borderTopWidth = '14px';
-        // arrowEl.style.borderBottomWidth = 0;
       } else {
         arrowEl.style.display = 'none';
       }
@@ -239,9 +220,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
   PopoverDefault.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     var _this2 = this;
 
-    if (nextProps.open === this.props.open) {
-      return;
-    }
+    if (nextProps.open === this.props.open) return;
 
     if (nextProps.open) {
       clearTimeout(this.timeout);
@@ -252,20 +231,20 @@ var PopoverDefault = (_temp = _class = function (_Component) {
         closing: false
       });
     } else {
+      var open = false,
+          closing = true;
+
+
       if (nextProps.animated) {
         if (this.timeout !== null) return;
-        this.setState({ closing: true });
+        this.setState({ closing: closing });
         this.timeout = setTimeout(function () {
-          _this2.setState({
-            open: false
-          }, function () {
+          _this2.setState({ open: open }, function () {
             _this2.timeout = null;
           });
         }, 500);
       } else {
-        this.setState({
-          open: false
-        });
+        this.setState({ open: open });
       }
     }
   };
@@ -307,11 +286,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
 
     // The fixed positioning isn't respected on iOS when an input is focused.
     // We need to compute the position from the top of the page and not the viewport.
-    if ((0, _iOSHelpers.isIOS)() && document.activeElement.tagName === 'INPUT') {
-      a.bottom = (0, _iOSHelpers.getOffsetTop)(el) + a.height;
-    } else {
-      a.bottom = rect.bottom || a.top + a.height;
-    }
+    a.bottom = (0, _iOSHelpers.isIOS)() && document.activeElement.tagName === 'INPUT' ? (0, _iOSHelpers.getOffsetTop)(el) + a.height : rect.bottom || a.top + a.height;
     a.middle = a.left + (a.right - a.left) / 2;
     a.center = a.top + (a.bottom - a.top) / 2;
 
@@ -435,6 +410,9 @@ var PopoverDefault = (_temp = _class = function (_Component) {
 
   return PopoverDefault;
 }(_react.Component), _class.propTypes = {
+  arrow: _propTypes2.default.bool,
+  arrowPos: _propTypes2.default.string,
+  arrowStyle: _propTypes2.default.object,
   anchorEl: _propTypes2.default.object,
   anchorOrigin: _propTypes4.default.origin,
   animated: _propTypes2.default.bool,
@@ -450,6 +428,9 @@ var PopoverDefault = (_temp = _class = function (_Component) {
   useLayerForClickAway: _propTypes2.default.bool,
   zDepth: _propTypes4.default.zDepth
 }, _class.defaultProps = {
+  arrow: true,
+  arrowPos: 'left',
+  arrowStyle: _Arrow.ArrowStyles,
   anchorOrigin: {
     vertical: 'bottom',
     horizontal: 'left'

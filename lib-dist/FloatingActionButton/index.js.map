@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/FloatingActionButton/index.js"],"names":["default"],"mappings":";;;;;;;;;;;;;QAAOA,O","file":"index.js","sourcesContent":["export default from './FloatingActionButton';\n"]}

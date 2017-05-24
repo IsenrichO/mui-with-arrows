@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/utils/autoPrefix.js"],"names":["set","style","key","value"],"mappings":";;;;;kBAAe;AACbA,KADa,eACTC,KADS,EACFC,GADE,EACGC,KADH,EACU;AACrBF,UAAMC,GAAN,IAAaC,KAAb;AACD;AAHY,C","file":"autoPrefix.js","sourcesContent":["export default {\n  set(style, key, value) {\n    style[key] = value;\n  },\n};\n"]}
