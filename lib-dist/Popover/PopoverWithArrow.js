@@ -142,11 +142,6 @@ var PopoverDefault = (_temp = _class = function (_Component) {
           targetOrigin: targetOrigin,
           open: _this.state.open && !_this.state.closing
         }),
-        _react2.default.createElement('div', {
-          className: 'paper-arrow'
-          // style={prepareStyles(ArrowStyles)}
-          , style: _Arrow.ArrowStyles
-        }),
         children
       );
     };
@@ -452,4 +447,11 @@ var PopoverDefault = (_temp = _class = function (_Component) {
 }, _class.contextTypes = {
   muiTheme: _propTypes2.default.object.isRequired
 }, _temp);
+
+// <div
+//   className="paper-arrow"
+//   style={prepareStyles(ArrowStyles)}
+//   // style={ArrowStyles}
+// />
+
 exports.default = PopoverDefault;

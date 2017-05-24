@@ -35,13 +35,13 @@ var _propTypes3 = require('../utils/propTypes');
 
 var _propTypes4 = _interopRequireDefault(_propTypes3);
 
-var _Paper = require('../Paper');
-
-var _Paper2 = _interopRequireDefault(_Paper);
-
 var _transitions = require('../styles/transitions');
 
 var _transitions2 = _interopRequireDefault(_transitions);
+
+var _Paper = require('../Paper');
+
+var _Paper2 = _interopRequireDefault(_Paper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = undefined;
 
 var _assign = require('babel-runtime/core-js/object/assign');
 
@@ -30,17 +31,17 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Paper = require('../Paper');
+var _propTypes3 = require('../utils/propTypes');
 
-var _Paper2 = _interopRequireDefault(_Paper);
+var _propTypes4 = _interopRequireDefault(_propTypes3);
 
 var _transitions = require('../styles/transitions');
 
 var _transitions2 = _interopRequireDefault(_transitions);
 
-var _propTypes3 = require('../utils/propTypes');
+var _Paper = require('../Paper');
 
-var _propTypes4 = _interopRequireDefault(_propTypes3);
+var _Paper2 = _interopRequireDefault(_Paper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -82,13 +83,14 @@ var PopoverAnimationVertical = (_temp2 = _class = function (_Component) {
   }
 
   PopoverAnimationVertical.prototype.componentDidMount = function componentDidMount() {
-    this.setState({ open: true }); // eslint-disable-line react/no-did-mount-set-state
+    var open = true;
+    this.setState({ open: open });
   };
 
   PopoverAnimationVertical.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    this.setState({
-      open: nextProps.open
-    });
+    var open = nextProps.open;
+
+    this.setState({ open: open });
   };
 
   PopoverAnimationVertical.prototype.render = function render() {
@@ -96,7 +98,7 @@ var PopoverAnimationVertical = (_temp2 = _class = function (_Component) {
         className = _props.className,
         style = _props.style,
         zDepth = _props.zDepth;
-
+    var prepareStyles = this.context.muiTheme.prepareStyles;
 
     var styles = getStyles(this.props, this.context, this.state);
 

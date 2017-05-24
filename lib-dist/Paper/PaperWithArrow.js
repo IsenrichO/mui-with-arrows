@@ -47,6 +47,8 @@ var _transitions = require('../styles/transitions');
 
 var _transitions2 = _interopRequireDefault(_transitions);
 
+var _Arrow = require('../Arrow');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function getStyles(props, context) {
@@ -114,7 +116,7 @@ var PaperWithArrow = (_temp = _class = function (_Component) {
       }),
       _react2.default.createElement('div', {
         className: 'paper-arrow',
-        style: prepareStyles(styles.arrow)
+        style: prepareStyles(_Arrow.ArrowStyles)
       }),
       children
     );
