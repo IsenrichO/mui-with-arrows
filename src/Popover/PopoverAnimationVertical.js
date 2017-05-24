@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Paper from '../Paper';
-import transitions from '../styles/transitions';
 import propTypes from '../utils/propTypes';
+import transitions from '../styles/transitions';
+import PaperWithArrow from '../Paper';
 
 function getStyles(props, context, state) {
   const {targetOrigin} = props;
@@ -23,7 +23,7 @@ function getStyles(props, context, state) {
   };
 }
 
-class PopoverAnimationVertical extends Component {
+export default class PopoverAnimationVertical extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -50,13 +50,13 @@ class PopoverAnimationVertical extends Component {
   };
 
   componentDidMount() {
-    this.setState({open: true}); // eslint-disable-line react/no-did-mount-set-state
+    const open = true;
+    this.setState({ open });
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      open: nextProps.open,
-    });
+    const { open } = nextProps;
+    this.setState({ open });
   }
 
   render() {
@@ -66,18 +66,17 @@ class PopoverAnimationVertical extends Component {
       zDepth,
     } = this.props;
 
+    const {prepareStyles} = this.context.muiTheme;
     const styles = getStyles(this.props, this.context, this.state);
 
     return (
-      <Paper
+      <PaperWithArrow
         style={Object.assign(styles.root, style)}
         zDepth={zDepth}
         className={className}
       >
         {this.props.children}
-      </Paper>
+      </PaperWithArrow>
     );
   }
 }
-
-export default PopoverAnimationVertical;

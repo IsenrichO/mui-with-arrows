@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import propTypes from '../utils/propTypes';
 import transitions from '../styles/transitions';
+import { ArrowStyles } from '../Arrow';
 
 function getStyles(props, context) {
   const {
@@ -85,7 +86,7 @@ export default class PaperWithArrow extends Component {
       >
         <div
           className="paper-arrow"
-          style={prepareStyles(styles.arrow)}
+          style={prepareStyles(ArrowStyles)}
         />
         {children}
       </div>

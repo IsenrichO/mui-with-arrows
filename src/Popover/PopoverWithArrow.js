@@ -174,11 +174,6 @@ export default class PopoverDefault extends Component {
         targetOrigin={targetOrigin}
         open={this.state.open && !this.state.closing}
       >
-        <div
-          className="paper-arrow"
-          // style={prepareStyles(ArrowStyles)}
-          style={ArrowStyles}
-        />
         {children}
       </Animation>
     );
@@ -375,3 +370,9 @@ export default class PopoverDefault extends Component {
     );
   }
 }
+
+// <div
+//   className="paper-arrow"
+//   style={prepareStyles(ArrowStyles)}
+//   // style={ArrowStyles}
+// />
