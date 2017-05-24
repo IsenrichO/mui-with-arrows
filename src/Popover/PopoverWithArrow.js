@@ -9,6 +9,7 @@ import throttle from 'lodash.throttle';
 import PaperDefault from '../Paper/PaperWithArrow';
 import PopoverAnimationDefault from './PopoverAnimationDefault';
 import {isIOS, getOffsetTop} from '../utils/iOSHelpers';
+import {ArrowStyles} from '../Arrow';
 
 const styles = {
   root: {
@@ -18,6 +19,9 @@ const styles = {
 
 export default class PopoverDefault extends Component {
   static propTypes = {
+    arrow: PropTypes.bool,
+    arrowPos: PropTypes.string,
+    arrowStyle: PropTypes.object,
     anchorEl: PropTypes.object,
     anchorOrigin: propTypes.origin,
     animated: PropTypes.bool,
@@ -35,6 +39,9 @@ export default class PopoverDefault extends Component {
   };
 
   static defaultProps = {
+    arrow: true,
+    arrowPos: 'left',
+    arrowStyle: ArrowStyles,
     anchorOrigin: {
       vertical: 'bottom',
       horizontal: 'left',
@@ -75,9 +82,7 @@ export default class PopoverDefault extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.open === this.props.open) {
-      return;
-    }
+    if (nextProps.open === this.props.open) return;
 
     if (nextProps.open) {
       clearTimeout(this.timeout);
@@ -88,20 +93,18 @@ export default class PopoverDefault extends Component {
         closing: false,
       });
     } else {
+      const [open, closing] = [false, true];
+
       if (nextProps.animated) {
         if (this.timeout !== null) return;
-        this.setState({closing: true});
+        this.setState({ closing });
         this.timeout = setTimeout(() => {
-          this.setState({
-            open: false,
-          }, () => {
+          this.setState({ open }, () => {
             this.timeout = null;
           });
         }, 500);
       } else {
-        this.setState({
-          open: false,
-        });
+        this.setState({ open });
       }
     }
   }
@@ -125,6 +128,7 @@ export default class PopoverDefault extends Component {
   renderLayer = () => {
     const {
       arrow,
+      arrowStyle,
       animated,
       animation,
       anchorEl, // eslint-disable-line no-unused-vars
@@ -147,9 +151,7 @@ export default class PopoverDefault extends Component {
         zIndex: this.context.muiTheme.zIndex.popover,
       };
 
-      if (!this.state.open) {
-        return null;
-      }
+      if (!this.state.open) return null;
 
       return (
         <PaperDefault
@@ -171,6 +173,10 @@ export default class PopoverDefault extends Component {
         targetOrigin={targetOrigin}
         open={this.state.open && !this.state.closing}
       >
+        <div
+          className="paper-arrow"
+          style={prepareStyles(styles.arrow)}
+        />
         {children}
       </Animation>
     );
@@ -202,11 +208,9 @@ export default class PopoverDefault extends Component {
 
     // The fixed positioning isn't respected on iOS when an input is focused.
     // We need to compute the position from the top of the page and not the viewport.
-    if (isIOS() && document.activeElement.tagName === 'INPUT') {
-      a.bottom = getOffsetTop(el) + a.height;
-    } else {
-      a.bottom = rect.bottom || a.top + a.height;
-    }
+    a.bottom = (isIOS() && document.activeElement.tagName === 'INPUT')
+      ? getOffsetTop(el) + a.height
+      : rect.bottom || a.top + a.height;
     a.middle = a.left + ((a.right - a.left) / 2);
     a.center = a.top + ((a.bottom - a.top) / 2);
 
@@ -216,41 +220,28 @@ export default class PopoverDefault extends Component {
   getTargetPosition(targetEl) {
     return {
       top: 0,
-      center: targetEl.offsetHeight / 2,
-      bottom: targetEl.offsetHeight,
+      center: (targetEl.offsetHeight / 2),
+      bottom: (targetEl.offsetHeight),
       left: 0,
-      middle: targetEl.offsetWidth / 2,
-      right: targetEl.offsetWidth,
+      middle: (targetEl.offsetWidth / 2),
+      right: (targetEl.offsetWidth),
     };
   }
 
   setPlacement = (scrolling) => {
-    if (!this.state.open) { return; }
-
-    if (!this.refs.layer.getLayer()) { return; }
+    if (!this.state.open) return;
+    if (!this.refs.layer.getLayer()) return;
 
     const targetEl = this.refs.layer.getLayer().children[0];
     const arrowEl = targetEl.children[0];
-    // console.log(
-    //   'PLACEMENT children:', this.refs.layer.getLayer().children,
-    //   '\nArrow Child:', arrowEl,
-    // );
 
-    if (!targetEl) { return; }
+    if (!targetEl) return;
 
     const {targetOrigin, anchorOrigin} = this.props;
     const anchorEl = this.props.anchorEl || this.anchorEl;
-    // console.log(
-    //   'ANCHOR ORIGIN:', anchorOrigin,
-    //   'TARGET ORIGIN:', targetOrigin,
-    // );
 
     const anchor = this.getAnchorPosition(anchorEl);
     let target = this.getTargetPosition(targetEl);
-    // console.log(
-    //   '\nANCHOR:', anchor,
-    //   '\nTARGET:', target,
-    // );
 
     let targetPosition = {
       top: anchor[anchorOrigin.vertical] - target[targetOrigin.vertical],
@@ -262,7 +253,7 @@ export default class PopoverDefault extends Component {
     }
 
     if (this.props.canAutoPosition) {
-      target = this.getTargetPosition(targetEl); // update as height may have changed
+      target = this.getTargetPosition(targetEl); // Update as height may have changed
       targetPosition = this.applyAutoPositionIfNeeded(anchor, target, targetOrigin, anchorOrigin, targetPosition);
     }
 
@@ -273,17 +264,9 @@ export default class PopoverDefault extends Component {
     if (window.innerHeight - anchor.top > target.bottom) {
       arrowEl.style.top = `${(anchor.height / 2) - 7}px`;
       arrowEl.style.bottom = 'auto';
-
-      // arrowEl.style.borderWidth = '0 14px 14px';
-        // arrowEl.style.borderTopWidth = 0;
-        // arrowEl.style.borderBottomWidth = '14px';
     } else if (window.innerHeight - anchor.top < target.bottom) {
       arrowEl.style.top = 'auto';
       arrowEl.style.bottom = `${(anchor.height / 2) - 7}px`;
-
-      //arrowEl.style.borderWidth = '14px 14px 0';
-        // arrowEl.style.borderTopWidth = '14px';
-        // arrowEl.style.borderBottomWidth = 0;
     } else {
       arrowEl.style.display = 'none';
     }

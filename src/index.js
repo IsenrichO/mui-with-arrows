@@ -1,4 +1,5 @@
 export AppBar from './AppBar';
+export Arrow from './Arrow';
 export AutoComplete from './AutoComplete';
 export Avatar from './Avatar';
 export Badge from './Badge';

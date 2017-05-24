@@ -26,8 +26,8 @@ function getStyles(props, context) {
       transition: transitionEnabled && transitions.easeOut(),
       boxSizing: 'border-box',
       fontFamily: baseTheme.fontFamily,
-      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // Remove mobile color flashing (deprecated)
-      boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0 depth papers
+      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',  // Remove mobile color flashing (deprecated)
+      boxShadow: paper.zDepthShadows[zDepth - 1],   // No shadow for 0-depth `Paper`
       borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
     },
     arrow: {
@@ -66,11 +66,11 @@ export default class PaperDefault extends Component {
     const {
       arrow,
       children,
-      circle, // eslint-disable-line no-unused-vars
-      rounded, // eslint-disable-line no-unused-vars
+      circle,
+      rounded,
       style,
-      transitionEnabled, // eslint-disable-line no-unused-vars
-      zDepth, // eslint-disable-line no-unused-vars
+      transitionEnabled,
+      zDepth,
       ...other
     } = this.props;
 
@@ -80,7 +80,7 @@ export default class PaperDefault extends Component {
     return (
       <div
         {...other}
-        className="paper-default"
+        className="paper-with-arrow"
         style={prepareStyles(Object.assign(styles.root, style))}
       >
         <div

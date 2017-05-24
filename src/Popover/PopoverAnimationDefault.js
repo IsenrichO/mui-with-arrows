@@ -2,7 +2,7 @@ import transitions from '../styles/transitions';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import propTypes from '../utils/propTypes';
-import Paper from '../Paper';
+import PaperWithArrow from '../Paper';
 
 function getStyles(props, context, state) {
   const {targetOrigin} = props;
@@ -37,7 +37,7 @@ function getStyles(props, context, state) {
   };
 }
 
-class PopoverAnimationDefault extends Component {
+export default class PopoverAnimationDefault extends Component {
   static propTypes = {
     children: PropTypes.node,
     /**
@@ -67,18 +67,19 @@ class PopoverAnimationDefault extends Component {
   };
 
   componentDidMount() {
-    this.setState({open: true}); // eslint-disable-line react/no-did-mount-set-state
+    const open = true;
+    this.setState({ open });
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      open: nextProps.open,
-    });
+    const { open } = nextProps;
+    this.setState({ open });
   }
 
   render() {
     const {
       className,
+      children,
       style,
       zDepth,
     } = this.props;
@@ -87,19 +88,17 @@ class PopoverAnimationDefault extends Component {
     const styles = getStyles(this.props, this.context, this.state);
 
     return (
-      <Paper
+      <PaperWithArrow
         style={Object.assign(styles.root, style)}
-        zDepth={zDepth}
         className={className}
+        zDepth={zDepth}
       >
         <div style={prepareStyles(styles.horizontal)}>
           <div style={prepareStyles(styles.vertical)}>
-            {this.props.children}
+            {children}
           </div>
         </div>
-      </Paper>
+      </PaperWithArrow>
     );
   }
 }
-
-export default PopoverAnimationDefault;
