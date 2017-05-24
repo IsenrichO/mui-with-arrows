@@ -31,19 +31,25 @@ function getStyles(props, context) {
       boxShadow: paper.zDepthShadows[zDepth - 1],   // No shadow for 0-depth `Paper`
       borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
     },
+    base: {
+      maxWidth: 500,
+      marginRight: 14,
+      padding: [16, 0, 16, 24],
+      backgroundColor: '#FFFFFF',
+      overflow: 'visible',
+    },
     arrow: {
       position: 'absolute',
-      content: '""',
       right: 'calc(100% - 1px)',
-      // WebkitBorder: '10px solid transparent',
-      // MozBorder: '10px solid transparent',
-      // OBorder: '10px solid transparent',
+      WebkitBorder: '10px solid transparent',
+      MozBorder: '10px solid transparent',
+      OBorder: '10px solid transparent',
       border: '10px solid transparent',
-      // WebkitBorderRightColor: '#FFF',
-      // MozBorderRightColor: '#FFF',
-      // OBorderRightColor: '#FFF',
-      borderRightColor: '#FFF',
-      // WebkitFilter: 'drop-shadow(rgba(0, 0, 0, 0.24) -3px 0 2px)',
+      WebkitBorderRightColor: '#FFFFFF',
+      MozBorderRightColor: '#FFFFFF',
+      OBorderRightColor: '#FFFFFF',
+      borderRightColor: '#FFFFFF',
+      WebkitFilter: 'drop-shadow(rgba(0, 0, 0, 0.24) -3px 0 2px)',
       filter: 'drop-shadow(rgba(0, 0, 0, 0.24) -3px 0 2px)',
     },
   };
@@ -84,12 +90,17 @@ export default class PaperWithArrow extends Component {
 
     const { prepareStyles } = this.context.muiTheme;
     const styles = getStyles(this.props, this.context);
+    const baseStyles = Object.assign(
+      styles.root,
+      arrow ? styles.base : {},
+      style
+    );
 
     return (
       <div
         {...other}
         className="paper-with-arrow"
-        style={prepareStyles(Object.assign(styles.root, style))}
+        style={prepareStyles(baseStyles)}
       >
         <div
           className="paper-arrow"
