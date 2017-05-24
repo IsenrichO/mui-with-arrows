@@ -15,6 +15,7 @@
     "clean": "rimraf lib",
     "clean:build": "rimraf build",
     "compile": "babel -d lib/ src/",
+    "compile:dist": "rimraf lib-dist && babel -d lib-dist/ src/",
     "dev:serve": "npm run watch & webpack-dev-server -d",
     "install:babel": "babel src -d lib -s",
     "lint": "eslint src docs/src test --quiet --cache && echo \"eslint: no lint errors\"",
