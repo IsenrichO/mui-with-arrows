@@ -157,7 +157,6 @@ var PopoverDefault = (_temp = _class = function (_Component) {
       if (!_this.refs.layer.getLayer()) return;
 
       var targetEl = _this.refs.layer.getLayer().children[0];
-      var arrowEl = targetEl.children[0];
 
       if (!targetEl) return;
 
@@ -166,6 +165,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
           anchorOrigin = _this$props2.anchorOrigin;
 
       var anchorEl = _this.props.anchorEl || _this.anchorEl;
+      var arrowEl = targetEl.querySelector('[class^="paper-arrow"]');
 
       var anchor = _this.getAnchorPosition(anchorEl);
       var target = _this.getTargetPosition(targetEl);

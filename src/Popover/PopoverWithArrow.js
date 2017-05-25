@@ -231,12 +231,12 @@ export default class PopoverDefault extends Component {
     if (!this.refs.layer.getLayer()) return;
 
     const targetEl = this.refs.layer.getLayer().children[0];
-    const arrowEl = targetEl.children[0];
 
     if (!targetEl) return;
 
     const {targetOrigin, anchorOrigin} = this.props;
     const anchorEl = this.props.anchorEl || this.anchorEl;
+    const arrowEl = targetEl.querySelector('[class^="paper-arrow"]');
 
     const anchor = this.getAnchorPosition(anchorEl);
     let target = this.getTargetPosition(targetEl);
