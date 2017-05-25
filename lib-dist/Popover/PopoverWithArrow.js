@@ -138,6 +138,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
       return _react2.default.createElement(
         Animation,
         (0, _extends3.default)({}, other, {
+          arrow: arrow,
           style: styleRoot,
           targetOrigin: targetOrigin,
           open: _this.state.open && !_this.state.closing

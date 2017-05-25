@@ -79,7 +79,6 @@ export default class PopoverAnimationDefault extends Component {
   render() {
     const {
       className,
-      children,
       style,
       zDepth,
     } = this.props;
@@ -89,13 +88,14 @@ export default class PopoverAnimationDefault extends Component {
 
     return (
       <PaperWithArrow
+        // style={prepareStyles(Object.assign(styles.root, style))}
         style={Object.assign(styles.root, style)}
         className={className}
         zDepth={zDepth}
       >
         <div style={prepareStyles(styles.horizontal)}>
           <div style={prepareStyles(styles.vertical)}>
-            {children}
+            {this.props.children}
           </div>
         </div>
       </PaperWithArrow>

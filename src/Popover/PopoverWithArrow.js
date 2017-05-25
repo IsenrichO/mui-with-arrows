@@ -170,6 +170,7 @@ export default class PopoverDefault extends Component {
     return (
       <Animation
         {...other}
+        arrow={arrow}
         style={styleRoot}
         targetOrigin={targetOrigin}
         open={this.state.open && !this.state.closing}

@@ -110,7 +110,6 @@ var PopoverAnimationDefault = (_temp2 = _class = function (_Component) {
   PopoverAnimationDefault.prototype.render = function render() {
     var _props = this.props,
         className = _props.className,
-        children = _props.children,
         style = _props.style,
         zDepth = _props.zDepth;
     var prepareStyles = this.context.muiTheme.prepareStyles;
@@ -118,9 +117,10 @@ var PopoverAnimationDefault = (_temp2 = _class = function (_Component) {
     var styles = getStyles(this.props, this.context, this.state);
 
     return _react2.default.createElement(
-      _Paper2.default,
-      {
-        style: (0, _assign2.default)(styles.root, style),
+      _Paper2.default
+      // style={prepareStyles(Object.assign(styles.root, style))}
+      ,
+      { style: (0, _assign2.default)(styles.root, style),
         className: className,
         zDepth: zDepth
       },
@@ -130,7 +130,7 @@ var PopoverAnimationDefault = (_temp2 = _class = function (_Component) {
         _react2.default.createElement(
           'div',
           { style: prepareStyles(styles.vertical) },
-          children
+          this.props.children
         )
       )
     );

@@ -105,9 +105,9 @@ var PopoverAnimationVertical = (_temp2 = _class = function (_Component) {
     return _react2.default.createElement(
       _Paper2.default,
       {
+        className: className,
         style: (0, _assign2.default)(styles.root, style),
-        zDepth: zDepth,
-        className: className
+        zDepth: zDepth
       },
       this.props.children
     );

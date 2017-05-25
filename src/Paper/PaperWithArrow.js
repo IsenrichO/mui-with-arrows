@@ -22,7 +22,7 @@ function getStyles(props, context) {
 
   return {
     root: {
-      position: 'relative',
+      // position: 'relative',
       color: paper.color,
       backgroundColor: paper.backgroundColor,
       transition: transitionEnabled && transitions.easeOut(),
@@ -30,7 +30,7 @@ function getStyles(props, context) {
       fontFamily: baseTheme.fontFamily,
       WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',  // Remove mobile color flashing (deprecated)
       boxShadow: paper.zDepthShadows[zDepth - 1],   // No shadow for 0-depth `Paper`
-      borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
+      borderRadius: circle ? '50%' : rounded ? borderRadius : '0px',
     },
     base: {
       marginLeft: 14,
@@ -78,7 +78,6 @@ export default class PaperWithArrow extends Component {
   render() {
     const {
       arrow,
-      children,
       circle,
       className,
       rounded,
@@ -94,14 +93,15 @@ export default class PaperWithArrow extends Component {
     return (
       <div
         {...other}
-        className={getUniqClasses(className, 'paper-with-arrow')}
-        style={prepareStyles(styles.root, styles.base)}
+        // className={getUniqClasses(className, 'paper-with-arrow')}
+        className={className}
+        style={prepareStyles(Object.assign(styles.root, styles))}
       >
         <div
           className="paper-arrow"
           style={prepareStyles(styles.arrow)}
         />
-        {children}
+        {this.props.children}
       </div>
     );
   }

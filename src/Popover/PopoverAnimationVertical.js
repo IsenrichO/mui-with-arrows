@@ -71,9 +71,9 @@ export default class PopoverAnimationVertical extends Component {
 
     return (
       <PaperWithArrow
+        className={className}
         style={Object.assign(styles.root, style)}
         zDepth={zDepth}
-        className={className}
       >
         {this.props.children}
       </PaperWithArrow>
