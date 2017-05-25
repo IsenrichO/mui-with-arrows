@@ -66,7 +66,6 @@ export default class PopoverAnimationVertical extends Component {
       zDepth,
     } = this.props;
 
-    const {prepareStyles} = this.context.muiTheme;
     const styles = getStyles(this.props, this.context, this.state);
 
     return (

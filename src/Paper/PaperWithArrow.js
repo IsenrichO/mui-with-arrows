@@ -22,7 +22,6 @@ function getStyles(props, context) {
 
   return {
     root: {
-      // position: 'relative',
       color: paper.color,
       backgroundColor: paper.backgroundColor,
       transition: transitionEnabled && transitions.easeOut(),
@@ -31,11 +30,6 @@ function getStyles(props, context) {
       WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',  // Remove mobile color flashing (deprecated)
       boxShadow: paper.zDepthShadows[zDepth - 1],   // No shadow for 0-depth `Paper`
       borderRadius: circle ? '50%' : rounded ? borderRadius : '0px',
-    },
-    base: {
-      marginLeft: 14,
-      padding: '16px 0 16px 24px',
-      backgroundColor: '#FFFFFF',
     },
     arrow: {
       position: 'absolute',
@@ -79,6 +73,7 @@ export default class PaperWithArrow extends Component {
     const {
       arrow,
       circle,
+      children,
       className,
       rounded,
       style,
@@ -90,18 +85,22 @@ export default class PaperWithArrow extends Component {
     const { prepareStyles } = this.context.muiTheme;
     const styles = getStyles(this.props, this.context);
 
+    console.log('\nPREPARED STYLES:', prepareStyles(Object.assign(styles.root, styles)));
+    console.log('\nOBJECT ASSIGNED - root:', Object.assign(styles.root, styles));
+    console.log('\nPREPARED STYLES - arrow:', prepareStyles(styles.arrow));
+
     return (
       <div
         {...other}
         // className={getUniqClasses(className, 'paper-with-arrow')}
         className={className}
-        style={prepareStyles(Object.assign(styles.root, styles))}
+        style={prepareStyles(Object.assign(styles.root, style))}
       >
         <div
           className="paper-arrow"
           style={prepareStyles(styles.arrow)}
         />
-        {this.props.children}
+        {children}
       </div>
     );
   }

@@ -67,7 +67,6 @@ function getStyles(props, context) {
 
   return {
     root: {
-      // position: 'relative',
       color: paper.color,
       backgroundColor: paper.backgroundColor,
       transition: transitionEnabled && _transitions2.default.easeOut(),
@@ -76,11 +75,6 @@ function getStyles(props, context) {
       WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // Remove mobile color flashing (deprecated)
       boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0-depth `Paper`
       borderRadius: circle ? '50%' : rounded ? borderRadius : '0px'
-    },
-    base: {
-      marginLeft: 14,
-      padding: '16px 0 16px 24px',
-      backgroundColor: '#FFFFFF'
     },
     arrow: {
       position: 'absolute',
@@ -111,28 +105,33 @@ var PaperWithArrow = (_temp = _class = function (_Component) {
     var _props = this.props,
         arrow = _props.arrow,
         circle = _props.circle,
+        children = _props.children,
         className = _props.className,
         rounded = _props.rounded,
         style = _props.style,
         transitionEnabled = _props.transitionEnabled,
         zDepth = _props.zDepth,
-        other = (0, _objectWithoutProperties3.default)(_props, ['arrow', 'circle', 'className', 'rounded', 'style', 'transitionEnabled', 'zDepth']);
+        other = (0, _objectWithoutProperties3.default)(_props, ['arrow', 'circle', 'children', 'className', 'rounded', 'style', 'transitionEnabled', 'zDepth']);
     var prepareStyles = this.context.muiTheme.prepareStyles;
 
     var styles = getStyles(this.props, this.context);
+
+    console.log('\nPREPARED STYLES:', prepareStyles((0, _assign2.default)(styles.root, styles)));
+    console.log('\nOBJECT ASSIGNED - root:', (0, _assign2.default)(styles.root, styles));
+    console.log('\nPREPARED STYLES - arrow:', prepareStyles(styles.arrow));
 
     return _react2.default.createElement(
       'div',
       (0, _extends3.default)({}, other, {
         // className={getUniqClasses(className, 'paper-with-arrow')}
         className: className,
-        style: prepareStyles((0, _assign2.default)(styles.root, styles))
+        style: prepareStyles((0, _assign2.default)(styles.root, style))
       }),
       _react2.default.createElement('div', {
         className: 'paper-arrow',
         style: prepareStyles(styles.arrow)
       }),
-      this.props.children
+      children
     );
   };
 

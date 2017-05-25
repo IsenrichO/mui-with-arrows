@@ -98,7 +98,7 @@ var PopoverAnimationVertical = (_temp2 = _class = function (_Component) {
         className = _props.className,
         style = _props.style,
         zDepth = _props.zDepth;
-    var prepareStyles = this.context.muiTheme.prepareStyles;
+
 
     var styles = getStyles(this.props, this.context, this.state);
 
