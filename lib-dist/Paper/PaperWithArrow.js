@@ -45,11 +45,11 @@ var _transitions2 = _interopRequireDefault(_transitions);
 
 var _Arrow = require('../Arrow');
 
+var _classes = require('../utils/classes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function getStyles(props, context) {
-  var _base;
-
   var rounded = props.rounded,
       circle = props.circle,
       transitionEnabled = props.transitionEnabled,
@@ -73,20 +73,11 @@ function getStyles(props, context) {
       boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0-depth `Paper`
       borderRadius: circle ? '50%' : rounded ? borderRadius : 0
     },
-    base: (_base = {
-      position: 'relative',
-      color: paper.color,
-      backgroundColor: paper.backgroundColor,
-      transition: transitionEnabled && _transitions2.default.easeOut(),
-      boxSizing: 'border-box',
-      fontFamily: baseTheme.fontFamily,
-      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // Remove mobile color flashing (deprecated)
-      boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0-depth `Paper`
-      borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
-      maxWidth: 500,
-      marginRight: 14,
-      padding: [16, 0, 16, 24]
-    }, _base['backgroundColor'] = '#FFFFFF', _base.overflow = 'visible', _base),
+    base: {
+      marginLeft: 14,
+      padding: '16px 0 16px 24px',
+      backgroundColor: '#FFFFFF'
+    },
     arrow: {
       position: 'absolute',
       right: 'calc(100% - 1px)',
@@ -117,11 +108,12 @@ var PaperWithArrow = (_temp = _class = function (_Component) {
         arrow = _props.arrow,
         children = _props.children,
         circle = _props.circle,
+        className = _props.className,
         rounded = _props.rounded,
         style = _props.style,
         transitionEnabled = _props.transitionEnabled,
         zDepth = _props.zDepth,
-        other = (0, _objectWithoutProperties3.default)(_props, ['arrow', 'children', 'circle', 'rounded', 'style', 'transitionEnabled', 'zDepth']);
+        other = (0, _objectWithoutProperties3.default)(_props, ['arrow', 'children', 'circle', 'className', 'rounded', 'style', 'transitionEnabled', 'zDepth']);
     var prepareStyles = this.context.muiTheme.prepareStyles;
 
     var styles = getStyles(this.props, this.context);
@@ -129,8 +121,8 @@ var PaperWithArrow = (_temp = _class = function (_Component) {
     return _react2.default.createElement(
       'div',
       (0, _extends3.default)({}, other, {
-        className: 'paper-with-arrow',
-        style: prepareStyles(styles.base)
+        className: (0, _classes.getUniqClasses)(className, 'paper-with-arrow'),
+        style: prepareStyles(styles.root, styles.base)
       }),
       _react2.default.createElement('div', {
         className: 'paper-arrow',

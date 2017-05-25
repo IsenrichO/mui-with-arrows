@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import propTypes from '../utils/propTypes';
 import transitions from '../styles/transitions';
 import { ArrowStyles } from '../Arrow';
+import { getUniqClasses } from '../utils/classes';
 
 function getStyles(props, context) {
   const {
@@ -32,20 +33,9 @@ function getStyles(props, context) {
       borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
     },
     base: {
-      position: 'relative',
-      color: paper.color,
-      backgroundColor: paper.backgroundColor,
-      transition: transitionEnabled && transitions.easeOut(),
-      boxSizing: 'border-box',
-      fontFamily: baseTheme.fontFamily,
-      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',  // Remove mobile color flashing (deprecated)
-      boxShadow: paper.zDepthShadows[zDepth - 1],   // No shadow for 0-depth `Paper`
-      borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
-      maxWidth: 500,
-      marginRight: 14,
-      padding: [16, 0, 16, 24],
+      marginLeft: 14,
+      padding: '16px 0 16px 24px',
       backgroundColor: '#FFFFFF',
-      overflow: 'visible',
     },
     arrow: {
       position: 'absolute',
@@ -90,6 +80,7 @@ export default class PaperWithArrow extends Component {
       arrow,
       children,
       circle,
+      className,
       rounded,
       style,
       transitionEnabled,
@@ -103,8 +94,8 @@ export default class PaperWithArrow extends Component {
     return (
       <div
         {...other}
-        className="paper-with-arrow"
-        style={prepareStyles(styles.base)}
+        className={getUniqClasses(className, 'paper-with-arrow')}
+        style={prepareStyles(styles.root, styles.base)}
       >
         <div
           className="paper-arrow"
