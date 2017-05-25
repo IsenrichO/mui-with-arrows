@@ -9,10 +9,6 @@ var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _assign = require('babel-runtime/core-js/object/assign');
-
-var _assign2 = _interopRequireDefault(_assign);
-
 var _objectWithoutProperties2 = require('babel-runtime/helpers/objectWithoutProperties');
 
 var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
@@ -52,6 +48,8 @@ var _Arrow = require('../Arrow');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function getStyles(props, context) {
+  var _base;
+
   var rounded = props.rounded,
       circle = props.circle,
       transitionEnabled = props.transitionEnabled,
@@ -75,13 +73,20 @@ function getStyles(props, context) {
       boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0-depth `Paper`
       borderRadius: circle ? '50%' : rounded ? borderRadius : 0
     },
-    base: {
+    base: (_base = {
+      position: 'relative',
+      color: paper.color,
+      backgroundColor: paper.backgroundColor,
+      transition: transitionEnabled && _transitions2.default.easeOut(),
+      boxSizing: 'border-box',
+      fontFamily: baseTheme.fontFamily,
+      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // Remove mobile color flashing (deprecated)
+      boxShadow: paper.zDepthShadows[zDepth - 1], // No shadow for 0-depth `Paper`
+      borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
       maxWidth: 500,
       marginRight: 14,
-      padding: [16, 0, 16, 24],
-      backgroundColor: '#FFFFFF',
-      overflow: 'visible'
-    },
+      padding: [16, 0, 16, 24]
+    }, _base['backgroundColor'] = '#FFFFFF', _base.overflow = 'visible', _base),
     arrow: {
       position: 'absolute',
       right: 'calc(100% - 1px)',
@@ -120,13 +125,12 @@ var PaperWithArrow = (_temp = _class = function (_Component) {
     var prepareStyles = this.context.muiTheme.prepareStyles;
 
     var styles = getStyles(this.props, this.context);
-    var baseStyles = (0, _assign2.default)(styles.root, arrow ? styles.base : {}, style);
 
     return _react2.default.createElement(
       'div',
       (0, _extends3.default)({}, other, {
         className: 'paper-with-arrow',
-        style: prepareStyles(baseStyles)
+        style: prepareStyles(styles.base)
       }),
       _react2.default.createElement('div', {
         className: 'paper-arrow',

@@ -32,6 +32,15 @@ function getStyles(props, context) {
       borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
     },
     base: {
+      position: 'relative',
+      color: paper.color,
+      backgroundColor: paper.backgroundColor,
+      transition: transitionEnabled && transitions.easeOut(),
+      boxSizing: 'border-box',
+      fontFamily: baseTheme.fontFamily,
+      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',  // Remove mobile color flashing (deprecated)
+      boxShadow: paper.zDepthShadows[zDepth - 1],   // No shadow for 0-depth `Paper`
+      borderRadius: circle ? '50%' : rounded ? borderRadius : 0,
       maxWidth: 500,
       marginRight: 14,
       padding: [16, 0, 16, 24],
@@ -90,17 +99,12 @@ export default class PaperWithArrow extends Component {
 
     const { prepareStyles } = this.context.muiTheme;
     const styles = getStyles(this.props, this.context);
-    const baseStyles = Object.assign(
-      styles.root,
-      arrow ? styles.base : {},
-      style
-    );
 
     return (
       <div
         {...other}
         className="paper-with-arrow"
-        style={prepareStyles(baseStyles)}
+        style={prepareStyles(styles.base)}
       >
         <div
           className="paper-arrow"
