@@ -41,7 +41,7 @@ export default class PopoverDefault extends Component {
   static defaultProps = {
     arrow: true,
     arrowPos: 'left',
-    arrowStyle: ArrowStyles,
+    arrowStyle: {}, // ArrowStyles
     anchorOrigin: {
       vertical: 'bottom',
       horizontal: 'left',
@@ -165,7 +165,6 @@ export default class PopoverDefault extends Component {
     }
 
     const Animation = animation || PopoverAnimationDefault;
-    const { prepareStyles } = this.context.muiTheme;
 
     return (
       <Animation
@@ -237,6 +236,7 @@ export default class PopoverDefault extends Component {
     const {targetOrigin, anchorOrigin} = this.props;
     const anchorEl = this.props.anchorEl || this.anchorEl;
     const arrowEl = targetEl.querySelector('[class^="paper-arrow"]');
+    console.log('ARROW ELEMENT:', arrowEl);
 
     const anchor = this.getAnchorPosition(anchorEl);
     let target = this.getTargetPosition(targetEl);

@@ -132,8 +132,6 @@ var PopoverDefault = (_temp = _class = function (_Component) {
       }
 
       var Animation = animation || _PopoverAnimationDefault2.default;
-      var prepareStyles = _this.context.muiTheme.prepareStyles;
-
 
       return _react2.default.createElement(
         Animation,
@@ -166,6 +164,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
 
       var anchorEl = _this.props.anchorEl || _this.anchorEl;
       var arrowEl = targetEl.querySelector('[class^="paper-arrow"]');
+      console.log('ARROW ELEMENT:', arrowEl);
 
       var anchor = _this.getAnchorPosition(anchorEl);
       var target = _this.getTargetPosition(targetEl);
@@ -426,7 +425,7 @@ var PopoverDefault = (_temp = _class = function (_Component) {
 }, _class.defaultProps = {
   arrow: true,
   arrowPos: 'left',
-  arrowStyle: _Arrow.ArrowStyles,
+  arrowStyle: {}, // ArrowStyles
   anchorOrigin: {
     vertical: 'bottom',
     horizontal: 'left'
