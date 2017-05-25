@@ -1,6 +1,6 @@
 {
   "name": "mui-with-arrows",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "Material-UI offshoot that allows for dynamically positioned CSS triangles",
   "main": "./src/index.js",
   "scripts": {
